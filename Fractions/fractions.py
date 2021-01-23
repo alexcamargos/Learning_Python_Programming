@@ -53,10 +53,10 @@ class Fraction:
             denominator = -denominator
             numerator = -numerator
 
-        _mdc = self._mdc_euclides(numerator, denominator)
+        _mdc = _mdc_euclides(numerator, denominator)
 
-        self._denominator = denominator // _mdc
-        self._numerator = numerator // _mdc
+        self.__denominator = denominator // _mdc
+        self.__numerator = numerator // _mdc
 
     # Representation
     def __repr__(self):
@@ -204,24 +204,25 @@ class Fraction:
     # Internal methods
     @property
     def numerator(self):
-        return self._numerator
+        return self.__numerator
 
     @property
     def denominator(self):
-        return self._denominator
+        return self.__denominator
 
-    @staticmethod
-    def _mdc_euclides(x, y):
-        """"Calcular o máximo divisor comum de x, y.
-
-        Função recursiva para implementar o Algoritmo de Euclides.
-        Em matemática, o algoritmo de Euclides é um método simples e eficiente de encontrar o máximo divisor
-        comum entre dois números inteiros diferentes de zero. É um dos algoritmos mais antigos,
-        conhecido desde que surgiu nos Livros VII e X da obra Elementos de Euclides por volta de 300 a.c..
-        O algoritmo não exige qualquer fatoração.
-        """
-
-        if y == 0:
-            return x
-        else:
-            return _mdc_euclides(y, x % y)
+    # @staticmethod
+    # TODO: Problems implementing staticmethod _mdc_euclides.
+    # def _mdc_euclides(x, y):
+    #     """"Calcular o máximo divisor comum de x, y.
+    #
+    #     Função recursiva para implementar o Algoritmo de Euclides.
+    #     Em matemática, o algoritmo de Euclides é um método simples e eficiente de encontrar o máximo divisor
+    #     comum entre dois números inteiros diferentes de zero. É um dos algoritmos mais antigos,
+    #     conhecido desde que surgiu nos Livros VII e X da obra Elementos de Euclides por volta de 300 a.c..
+    #     O algoritmo não exige qualquer fatoração.
+    #     """
+    #
+    #     if y == 0:
+    #         return x
+    #     else:
+    #         return _mdc_euclides(y, x % y)

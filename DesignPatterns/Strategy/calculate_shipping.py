@@ -15,7 +15,6 @@
 
 """calculate_shipping.py - Implementa o cálculo de frente para uma compra específica."""
 
-from shippings import *
 
 class CalculateShipping:
     """Calcula o valor a ser pago por frente para uma compra.
@@ -26,14 +25,6 @@ class CalculateShipping:
     def __init__(self, order):
         self.order = order
 
-    def execute_calculation(self, shipping='default'):
+    def execute_calculation(self, shipping):
         """Calcula de fato o valor da taxa de frete."""
-
-        if shipping.lower() == 'default':
-            return calculate_default_shipping(self.order)
-        elif shipping.lower() == 'express':
-            return calculate_express_shipping(self.order)
-        elif shipping.lower() == 'totalexpress':
-            return calculate_total_express_shipping(self.order)
-        else:
-            return 0.0
+        return shipping(self.order)

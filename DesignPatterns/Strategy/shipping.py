@@ -18,11 +18,18 @@
 
 from calculate_shipping import CalculateShipping
 from order import Order
+from shippings import Carriers
 
 
 order = Order(250)
 shipping = CalculateShipping(order)
-print(f'Valor da compra: R${order.value :.2f}')
-print(f'Valor do frente normal: R${shipping.execute_calculation() :.2f}')
-print(f'Valor do frente expresso: R${shipping.execute_calculation("express") :.2f}')
-print(f'Valor do frente pela Total Express: R${shipping.execute_calculation("totalexpress") :.2f}')
+carriers = Carriers()
+
+print(f'Valor da compra: R${order.value :.2f}\n')
+
+print('Valor do frente normal: '
+      f'R${shipping.execute_calculation(carriers.calculate_default_shipping) :.2f}')
+print('Valor do frente expresso: '
+      f'R${shipping.execute_calculation(carriers.calculate_express_shipping) :.2f}')
+print('Valor do frente pela Total Express: '
+      f'R${shipping.execute_calculation(carriers.calculate_total_express_shipping) :.2f}')

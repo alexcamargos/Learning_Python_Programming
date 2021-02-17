@@ -28,11 +28,16 @@ class CalculateShipping:
         # Taxa utilizada para calculo do valor do frete.
         self.default_rate = .05
         self.express_rate = .10
+        self.total_express_rate = .125
 
-    def execute_calculation(self, shipping='Default'):
+    def execute_calculation(self, shipping='default'):
         """Calcula de fato o valor da taxa de frete."""
 
-        if shipping == 'Default':
+        if shipping.lower() == 'default':
             return self.order.value * self.default_rate
-        else:
+        elif shipping.lower() == 'express':
             return self.order.value * self.express_rate
+        elif shipping.lower() == 'totalexpress':
+            return self.order.value * self.total_express_rate
+        else:
+            return 0.0

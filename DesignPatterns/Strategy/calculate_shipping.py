@@ -26,8 +26,13 @@ class CalculateShipping:
         self.order = order
 
         # Taxa utilizada para calculo do valor do frete.
-        self.rate = .05
+        self.default_rate = .05
+        self.express_rate = .10
 
-    @property
-    def execute_calculation(self):
-        return self.order.value * self.rate
+    def execute_calculation(self, shipping='Default'):
+        """Calcula de fato o valor da taxa de frete."""
+
+        if shipping == 'Default':
+            return self.order.value * self.default_rate
+        else:
+            return self.order.value * self.express_rate

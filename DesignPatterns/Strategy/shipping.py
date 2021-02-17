@@ -23,4 +23,5 @@ from order import Order
 order = Order(250)
 shipping = CalculateShipping(order)
 print(f'Valor da compra: R${order.value :.2f}')
-print(f'Valor do frente: R${shipping.execute_calculation :.2f}')
+print(f'Valor do frente normal: R${shipping.execute_calculation() :.2f}')
+print(f'Valor do frente expresso: R${shipping.execute_calculation("Express") :.2f}')

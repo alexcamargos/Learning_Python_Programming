@@ -4,6 +4,8 @@ Python is a high-level, general-purpose and a very popular programming language.
 
 Repositório com códigos gerados durante minha jornada de estudo.
 
-* DesignPatterns - Estudos sobre padrões de projetos (design patterns)
-* Fractions - implements a rational numbers
-* Learn Python the Hard Way - Exercícios do livro LEARN PYTHON THE HARD WAY - A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code (Third Edition) by Zed A. Shaw
+* **BruteForceDecrypt** - Brute-Force PDF Password Breaker
+* **DesignPatterns** - Estudos sobre padrões de projetos (design patterns)
+* **Fractions** - implements a rational numbers
+* **Learn Python the Hard Way** - Exercícios do livro *LEARN PYTHON THE HARD WAY* - A Very Simple Introduction to the Terrifyingly Beautiful World of Computers and Code (Third Edition) by _Zed A. Shaw_
+

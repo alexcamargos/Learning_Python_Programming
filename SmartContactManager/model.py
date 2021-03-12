@@ -38,6 +38,13 @@ class ContactModel:
         self.model.submitAll()
         self.model.select()
 
+    def delete_contact(self, row):
+        """Remove a contact from the database."""
+
+        self.model.removeRow(row)
+        self.model.submitAll()
+        self.model.select()
+
     @staticmethod
     def __crete_model():
         """Create and set uo the model."""

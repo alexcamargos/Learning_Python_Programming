@@ -22,7 +22,6 @@ from PyQt5.QtWidgets import QApplication
 from database import create_connection
 from views import Window
 
-
 # Some useful variables.
 DATABASEPATH = r'data_base\smart_contact_manager.sqlite'
 

@@ -117,7 +117,7 @@ class Window(QMainWindow):
 
         message_box = QMessageBox.warning(self,
                                           'Warning!',
-                                          'Do you wnat to remove all your contacts?',
+                                          'Do you want to remove all your contacts?',
                                           QMessageBox.Ok | QMessageBox.Cancel)
 
         if message_box == QMessageBox.Ok:

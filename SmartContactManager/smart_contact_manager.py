@@ -15,6 +15,10 @@
 
 """Smart Contact Manager entry point script."""
 
+# TODO: Add dialog box to edit the information.
+# TODO: Provide search capability: Giving your users a way to search for a contact in the database.
+# TODO: Add back-up capability: Providing a way of backing up contact information.
+
 from main import main
 
 if __name__ == '__main__':

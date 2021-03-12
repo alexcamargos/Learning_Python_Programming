@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  --------------------------------------------------------------------------------------------------------------------
-#  Name: Smart Contact Manager
+#  Name: model.py
 #  Version: 0.0.1
 #  Summary: Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt.
 #
@@ -12,17 +12,31 @@
 #  License: MIT
 #  --------------------------------------------------------------------------------------------------------------------
 
+
 """A model to manage the contacts table."""
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtSql  import QSqlTableModel
+from PyQt5.QtSql import QSqlTableModel
 
 
 class ContactModel:
     """Hold the data model."""
+
     def __init__(self):
         """Initializer."""
         self.model = self.__crete_model()
+
+    def add_contact(self, data):
+        """Add a contact to the database."""
+
+        rows = self.model.rowCount()
+        self.model.insertRow(rows)
+
+        for column, field in enumerate(data):
+            self.model.setData(self.model.index(rows, column + 1), field)
+
+        self.model.submitAll()
+        self.model.select()
 
     @staticmethod
     def __crete_model():

@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  --------------------------------------------------------------------------------------------------------------------
-#  Name: Smart Contact Manager
+#  Name: database.py
 #  Version: 0.0.1
 #  Summary: Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt.
 #
@@ -15,9 +15,9 @@
 
 """This module provides a database connection."""
 
-from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtSql import QSqlDatabase
 from PyQt5.QtSql import QSqlQuery
+from PyQt5.QtWidgets import QMessageBox
 
 
 def create_connection(database_name):

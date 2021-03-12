@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  --------------------------------------------------------------------------------------------------------------------
-#  Name: Smart Contact Manager
+#  Name: main.py
 #  Version: 0.0.1
 #  Summary: Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt.
 #
@@ -13,7 +13,7 @@
 #  --------------------------------------------------------------------------------------------------------------------
 
 
-"""Smart Contact Manager application."""
+"""Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt."""
 
 import sys
 
@@ -22,6 +22,8 @@ from PyQt5.QtWidgets import QApplication
 from database import create_connection
 from views import Window
 
+
+# Some useful variables.
 DATABASEPATH = r'data_base\smart_contact_manager.sqlite'
 
 

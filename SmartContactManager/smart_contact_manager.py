@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  --------------------------------------------------------------------------------------------------------------------
-#  Name: Smart Contact Manager
+#  Name: smart_contact_manager.py
 #  Version: 0.0.1
 #  Summary: Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt.
 #
@@ -13,10 +13,7 @@
 #  --------------------------------------------------------------------------------------------------------------------
 
 
-"""Smart Contact Manager entry point script.
-
-Smart Contact Manager a contact book GUI application with Python, SQLite, and PyQt.
-"""
+"""Smart Contact Manager entry point script."""
 
 from main import main
 

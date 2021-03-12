@@ -7,7 +7,7 @@ O arquivo contendo o dicionário foi obtido aqui do projeto Dicionário br.ispel
 Ricardo Ueda Karpischek (ueda at ime.usp.br) - [Dicionário br.ispell](http://www.ime.usp.br/~ueda/br.ispell/)
 
 
-Este projeto tem character apenas educacional
+Este projeto tem character apenas educacional.
 
 ## Biblioteca utilizada
 

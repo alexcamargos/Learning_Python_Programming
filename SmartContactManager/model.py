@@ -38,6 +38,15 @@ class ContactModel:
         self.model.submitAll()
         self.model.select()
 
+    def edit_contact(self, row, data):
+        """Edit a contact information."""
+
+        for column, field in enumerate(data):
+            self.model.setData(self.model.index(row, column + 1), field)
+
+        self.model.submitAll()
+        self.model.select()
+
     def delete_contact(self, row):
         """Remove a contact from the database."""
 
@@ -56,13 +65,13 @@ class ContactModel:
 
     @staticmethod
     def __crete_model():
-        """Create and set uo the model."""
+        """Create and set up the model."""
 
         table_model = QSqlTableModel()
         table_model.setTable("Contacts")
         table_model.setEditStrategy(QSqlTableModel.OnFieldChange)
         table_model.select()
-        headers = ("ID", 'NOME', "E-MAIL", "TELEFONE", "EMPRESA")
+        headers = ('ID', 'NOME', 'E-MAIL', 'TELEFONE', 'EMPRESA')
         for column_index, header in enumerate(headers):
             table_model.setHeaderData(column_index, Qt.Horizontal, header)
 

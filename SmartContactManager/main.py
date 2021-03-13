@@ -20,7 +20,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from database import create_connection
-from views import Window
+from views import MainWindow
 
 # Some useful variables.
 DATABASEPATH = r'data_base\smart_contact_manager.sqlite'
@@ -37,7 +37,7 @@ def main():
         sys.exit(1)
 
     # Create the main window if the connection succeeded.
-    window = Window()
+    window = MainWindow()
     window.show()
 
     # The event loop.

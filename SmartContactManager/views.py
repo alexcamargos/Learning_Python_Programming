@@ -14,8 +14,10 @@
 
 
 """Provides views to manage the contacts table."""
+
 from PyQt5 import QtGui
-from PyQt5.QtCore import Qt
+from PyQt5 import QtCore
+
 from PyQt5.QtWidgets import QAbstractItemView
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QDialogButtonBox
@@ -49,6 +51,7 @@ class MainWindow(QMainWindow):
         """Initializer."""
 
         super().__init__(parent)
+
         self.setWindowIcon(QtGui.QIcon(APPICON))
         self.setWindowTitle(TITLE)
         self.resize(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -66,36 +69,17 @@ class MainWindow(QMainWindow):
     def setup_window_ui(self):
         """Setup the main window's GUI."""
 
+        # Create the interface.
+        self.__create_status_bar()
+
         # Create the table view widget.
-        self.table = QTableView()
-        self.table.setModel(self.contacts_model.model)
-        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.table.resizeColumnsToContents()
+        self.__create_table_view_button()
 
         # Create the buttons.
-        self.add_button = QPushButton('&Adicionar')
-        self.add_button.setIcon(QtGui.QIcon(ADDICON))
-        self.add_button.setStyleSheet('text-align: left;')
-        self.add_button.setToolTip('Adicionar novo contato.')
-        self.add_button.clicked.connect(self.open_add_dialog)
-
-        self.edit_button = QPushButton('&Editar')
-        self.edit_button.setIcon(QtGui.QIcon(EDITICON))
-        self.edit_button.setStyleSheet('text-align: left;')
-        self.edit_button.setToolTip('Editar contato selecionado.')
-        self.edit_button.clicked.connect(self.open_edit_dialog)
-
-        self.delete_button = QPushButton('&Deletar')
-        self.delete_button.setIcon(QtGui.QIcon(DELICON))
-        self.delete_button.setStyleSheet('text-align: left;')
-        self.delete_button.setToolTip('Apagar contato selecionado.')
-        self.delete_button.clicked.connect(self.delete_contact)
-
-        self.clear_all_button = QPushButton('Apagar informações')
-        self.clear_all_button.setIcon(QtGui.QIcon(CLEARICON))
-        self.clear_all_button.setStyleSheet('text-align: left;')
-        self.clear_all_button.setToolTip('Limpar o banco de dabos.')
-        self.clear_all_button.clicked.connect(self.clear_contacts_database)
+        self.__create_add_button()
+        self.__create_edit_button()
+        self.__create_delete_button()
+        self.__create_clear_all_button()
 
         # Populate the layout of the application.
         layout = QVBoxLayout()
@@ -107,6 +91,56 @@ class MainWindow(QMainWindow):
 
         self.layout.addWidget(self.table)
         self.layout.addLayout(layout)
+
+    def __create_status_bar(self):
+        """Setup the status bar."""
+
+        self.status_bar = self.statusBar()
+        self.status_bar.showMessage("Aplicação pronta para uso.", 5000)
+
+    def __create_add_button(self):
+        """Setup the add push button."""
+
+        self.add_button = QPushButton('&Adicionar')
+        self.add_button.setIcon(QtGui.QIcon(ADDICON))
+        self.add_button.setStyleSheet('text-align: left;')
+        self.add_button.setToolTip('Adicionar novo contato.')
+        self.add_button.clicked.connect(self.open_add_dialog)
+
+    def __create_edit_button(self):
+        """Setup the edit push button.."""
+
+        self.edit_button = QPushButton('&Editar')
+        self.edit_button.setIcon(QtGui.QIcon(EDITICON))
+        self.edit_button.setStyleSheet('text-align: left;')
+        self.edit_button.setToolTip('Editar contato selecionado.')
+        self.edit_button.clicked.connect(self.open_edit_dialog)
+
+    def __create_delete_button(self):
+        """Setup Setup the delete push button.."""
+
+        self.delete_button = QPushButton('&Deletar')
+        self.delete_button.setIcon(QtGui.QIcon(DELICON))
+        self.delete_button.setStyleSheet('text-align: left;')
+        self.delete_button.setToolTip('Apagar contato selecionado.')
+        self.delete_button.clicked.connect(self.delete_contact)
+
+    def __create_clear_all_button(self):
+        """Setup the clear all push button."""
+
+        self.clear_all_button = QPushButton('Apagar informações')
+        self.clear_all_button.setIcon(QtGui.QIcon(CLEARICON))
+        self.clear_all_button.setStyleSheet('text-align: left;')
+        self.clear_all_button.setToolTip('Limpar o banco de dabos.')
+        self.clear_all_button.clicked.connect(self.clear_contacts_database)
+
+    def __create_table_view_button(self):
+        """Setup the table view."""
+
+        self.table = QTableView()
+        self.table.setModel(self.contacts_model.model)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table.resizeColumnsToContents()
 
     def open_add_dialog(self):
         """Open the Add Contact dialog."""
@@ -205,7 +239,7 @@ class ContactAddDialog(QDialog):
         self.layout.addLayout(layout)
 
         # Add standard buttons to the dialog and connect them.
-        self.buttons_box.setOrientation(Qt.Horizontal)
+        self.buttons_box.setOrientation(QtCore.Qt.Horizontal)
         self.buttons_box.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.buttons_box.accepted.connect(self.dialog_accept)
         self.buttons_box.rejected.connect(self.reject)
@@ -279,7 +313,7 @@ class ContactEditDialog(QDialog):
         self.layout.addLayout(layout)
 
         # Add standard buttons to the dialog and connect them.
-        self.buttons_box.setOrientation(Qt.Horizontal)
+        self.buttons_box.setOrientation(QtCore.Qt.Horizontal)
         self.buttons_box.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.buttons_box.accepted.connect(self.dialog_accept)
         self.buttons_box.rejected.connect(self.reject)

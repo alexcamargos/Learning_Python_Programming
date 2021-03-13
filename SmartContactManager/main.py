@@ -23,7 +23,7 @@ from database import create_connection
 from views import MainWindow
 
 # Some useful variables.
-DATABASEPATH = r'data_base\smart_contact_manager.sqlite'
+DATABASEPATH = r'resources\data_base\smart_contact_manager.sqlite'
 
 
 def main():

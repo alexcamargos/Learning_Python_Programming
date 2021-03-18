@@ -15,31 +15,29 @@
 #
 #  --------------------------------------------------------------------------------------------------------------------
 
+import argparse
 
-from amortization import TabelaPrice
-from amortization import TabelaSAC
-
-
-def tabela_sac():
-    """Sistema de Amortização Constante (SAC)."""
-
-    t_sac = TabelaSAC(100000, 360, 5)
-    t_sac.show()
-
-
-def tabela_price():
-    """Amortização por Tabela Price."""
-
-    t_price = TabelaPrice(100000, 360, 5)
-    t_price.show()
-
+from main import main_cli
+from main import main_gui
 
 def main():
-    """Função para teste das classes de amortização TabelaSAC e TabelaPrice"""
+    """Compare Amortization Systems SAC and Price table main function."""
 
-    tabela_sac()
-    print('\n\n')
-    tabela_price()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-g',
+                        '--gui',
+                        action='store_true',
+                        help="Run Compare Amortization SAC Systems and price list in GUI mode.")
+    parser.add_argument('-c',
+                        '--cli',
+                        action='store_true',
+                        help="Run Compare Amortization SAC Systems and price list in CLI mode.")
+
+    args = parser.parse_args()
+    if args.gui:
+        main_gui()
+    else:
+        main_cli()
 
 
 if __name__ == '__main__':

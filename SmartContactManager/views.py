@@ -15,9 +15,8 @@
 
 """Provides views to manage the contacts table."""
 
-from PyQt5 import QtGui
 from PyQt5 import QtCore
-
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QAbstractItemView
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QDialogButtonBox
@@ -108,7 +107,7 @@ class MainWindow(QMainWindow):
         self.add_button.clicked.connect(self.open_add_dialog)
 
     def __create_edit_button(self):
-        """Setup the edit push button.."""
+        """Setup the edit push button."""
 
         self.edit_button = QPushButton('&Editar')
         self.edit_button.setIcon(QtGui.QIcon(EDITICON))
@@ -117,7 +116,7 @@ class MainWindow(QMainWindow):
         self.edit_button.clicked.connect(self.open_edit_dialog)
 
     def __create_delete_button(self):
-        """Setup Setup the delete push button.."""
+        """Setup Setup the delete push button."""
 
         self.delete_button = QPushButton('&Deletar')
         self.delete_button.setIcon(QtGui.QIcon(DELICON))

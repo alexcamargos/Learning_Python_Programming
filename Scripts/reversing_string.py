@@ -1,19 +1,19 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: reversing_string.py
-#  Version: 1.0
+# Name: reversing_string.py
+# Version: 1.0
 #
-#  Summary: The following snippet reverses a string using the Python slicing operation.
+# Summary: The following snippet reverses a string using the Python slicing operation.
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  License: MIT
+# License: MIT
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 
 """The following snippet reverses a string using the Python slicing operation."""
 

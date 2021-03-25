@@ -1,19 +1,20 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: combining_list_strings_using_string_join_method.py
-#  Version: 1.0
-#  Summary: The .join() method combines a list of strings passed as an argument into a single string.
-#           In our case, we separate them using the comma separator.
+# Name: combining_list_strings_using_string_join_method.py
+# Version: 1.0
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Summary: The .join() method combines a list of strings passed as an argument into a single string.
+#          In our case, we separate them using the comma separator.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 """
 The join() method combines a list of strings passed as an argument into a single string.

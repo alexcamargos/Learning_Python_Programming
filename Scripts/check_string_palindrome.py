@@ -1,18 +1,19 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: check_string_palindrome.py
-#  Version: 1.0
-#  Summary: Check if a given string is a palindrome or not become a straightforward program in Python.
+# Name: check_string_palindrome.py
+# Version: 1.0
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Summary: Check if a given string is a palindrome or not become a straightforward program in Python.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 """Check if a given string is a palindrome or not become a straightforward program in Python."""
 

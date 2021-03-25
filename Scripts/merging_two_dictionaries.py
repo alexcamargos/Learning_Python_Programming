@@ -1,18 +1,19 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: merging_two_dictionaries.py
-#  Version: 1.0
-#  Summary: Merging two dictionaries.
+# Name: merging_two_dictionaries.py
+# Version: 1.0
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Summary: Merging two dictionaries.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 """
 Merging Two Dictionaries

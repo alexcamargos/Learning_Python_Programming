@@ -1,18 +1,19 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: frequency_elements_list.py
-#  Version: 0.0.1
-#  Summary: Finding frequency of each element in a list.
+# Name: frequency_elements_list.py
+# Version: 0.0.1
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Summary: Finding frequency of each element in a list.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 """
 Finding frequency of each element in a list

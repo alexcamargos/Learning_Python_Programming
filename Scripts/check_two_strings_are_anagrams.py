@@ -1,21 +1,22 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: check_two_strings_are_anagrams.py
-#  Version: 1.0
-#  Summary: Find Whether Two Strings are Anagrams
-#           An interesting application of the Counter class is to find anagrams.
-#           An anagram is a word or phrase formed by rearranging the letters of a different word or phrase.
-#           If the Counter objects of two strings are equal, then they are anagrams.
+# Name: check_two_strings_are_anagrams.py
+# Version: 1.0
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Summary: Find Whether Two Strings are Anagrams
+#          An interesting application of the Counter class is to find anagrams.
+#          An anagram is a word or phrase formed by rearranging the letters of a different word or phrase.
+#          If the Counter objects of two strings are equal, then they are anagrams.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 """
 Find Whether Two Strings are Anagrams

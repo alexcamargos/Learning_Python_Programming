@@ -1,20 +1,20 @@
 #  #!/usr/bin/env python
 #  encoding: utf-8
 
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 #
-#  Name: printing_string_list_n_times.py
-#  Version: 1.0
+# Name: printing_string_list_n_times.py
+# Version: 1.0
 #
-#  Summary: You can use multiplication (*) with strings or lists.
-#           This allows us to multiply them as many times as we like.
+# Summary: You can use multiplication (*) with strings or lists.
+#          This allows us to multiply them as many times as we like.
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  License: MIT
+# License: MIT
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 
 """You can use multiplication (*) with strings or lists. This allows us to multiply them as many times as we like."""
 

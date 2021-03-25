@@ -3,8 +3,8 @@
 
 # --------------------------------------------------------------------------------------------------------------------
 #
-# Name: file_name.py
-# Version: 0.0.1
+# Name: time_taken_to_execute.py
+# Version: 1.0
 #
 # Summary: Time Taken to Execute a Piece of Code.
 #

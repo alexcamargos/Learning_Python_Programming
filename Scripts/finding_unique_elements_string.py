@@ -5,6 +5,7 @@
 #
 #  Name: finding_unique_elements_string.py
 #  Version: 1.0
+#
 #  Summary: Finding unique elements in a string using python set.
 #
 #  Author: Alexsander Lopes Camargos

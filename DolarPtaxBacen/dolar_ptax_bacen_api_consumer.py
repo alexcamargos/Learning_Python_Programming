@@ -70,29 +70,24 @@ class DolarPtaxBacen:
         response = self.get_data(self.url)
         if response.status_code != requests.codes.ok:
             raise DadosAbertosBancoCentralException(response.raise_for_status())
-        else:
-            result = response.content.decode('utf-8')
-            self.json_string = json.loads(result)
+
+        result = response.content.decode('utf-8')
+        self.json_string = json.loads(result)
 
     @staticmethod
     def __is_holiday(day):
         """Check if a day is a holiday or not."""
 
         calendar_holiday = HolidaySaoPaulo()
-        if calendar_holiday.is_working_day(day):
-            return False
-        else:
-            return True
+
+        return not calendar_holiday.is_working_day(day)
 
     @staticmethod
     def __is_weekday(day):
         """Check if a day is a working day or not."""
 
         # Monday == 1, Tuesday == 2, Wednesday == 3, Thursday == 4, Friday == 5, Saturday == 6, Sunday == 7
-        if date.weekday(day) in [5, 6]:
-            return True
-        else:
-            return False
+        return date.weekday(day) in [5, 6]
 
     @staticmethod
     def setup_url(mode, data_cotacao=None, period=None):

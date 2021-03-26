@@ -1,18 +1,19 @@
-#  #!/usr/bin/env python
-#  encoding: utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 #
-#  --------------------------------------------------------------------------------------------------------------------
-#  Name: dolar_ptax.py
-#  Version: 0.0.1
-#  Summary: Consumindo a API Dólar comercial (venda e compra) - cotações diárias
-#           disponibilizada pelo Portal Brasileiro de Dados Abertos do Banco Central.
+# --------------------------------------------------------------------------------------------------------------------
+# Name: dolar_ptax.py
 #
-#  Author: Alexsander Lopes Camargos
-#  Author-email: alcamargos@vivaldi.net
+# Version: 0.0.1
+# Summary: Consumindo a API Dólar comercial (venda e compra) - cotações diárias
+#          disponibilizada pelo Portal Brasileiro de Dados Abertos do Banco Central.
 #
-#  License: MIT
+# Author: Alexsander Lopes Camargos
+# Author-email: alcamargos@vivaldi.net
 #
-#  --------------------------------------------------------------------------------------------------------------------
+# License: MIT
+#
+# --------------------------------------------------------------------------------------------------------------------
 
 
 """Dólar Ptax é a média aritmética das taxas obtidas em quatro consultas diárias de câmbio."""
@@ -48,14 +49,14 @@ def contacao_dolar_ptax_periodo(periodo):
 
 
 def main():
-    # today = date.today()
-    # cotacao_dolar_ptax_dia(today)
+    today = date.today()
+    cotacao_dolar_ptax_dia(today)
 
-    periodo = {
-        'inicial': date(2012, 1, 1),
-        'final': date(2012, 12, 31)
-    }
-    contacao_dolar_ptax_periodo(periodo)
+    # periodo = {
+    #     'inicial': date(2012, 1, 1),
+    #     'final': date(2012, 12, 31)
+    # }
+    # contacao_dolar_ptax_periodo(periodo)
 
 
 if __name__ == '__main__':

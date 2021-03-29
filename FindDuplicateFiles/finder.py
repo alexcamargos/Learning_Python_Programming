@@ -94,20 +94,30 @@ class File:
 class FileFinder:
     """The File Finder allows you to track duplicate files in a specific directory."""
 
-    def __init__(self, directory):
+    def __init__(self, directory, pattern=None):
         self.__directory = Path(directory)
+
+        # Unix style pathname pattern expansion.
+        self.__pattern = pattern
 
     @property
     def directory(self):
         return self.__directory
 
     def exec(self):
-        return [File(file) for file in self.list_all_files()]
+        return [File(file) for file in self.list_all_files(self.__pattern)]
 
-    def list_all_files(self):
+    def list_all_files(self, pattern):
         """Iterate over the files in this directory."""
 
-        return [file for file in self.directory.glob('**/*') if file.is_file()]
+        if not pattern:
+            # The “**” pattern means “this directory and all subdirectories, recursively”.
+            # In other words, it enables recursive globbing:
+            pattern = '**/*'
+        else:
+            pattern = f'**/*.{self.__pattern}'
+
+        return [file for file in self.directory.glob(pattern) if file.is_file()]
 
 
 def filter_duplicate(file_list, shallow=False):
@@ -138,7 +148,7 @@ def main(output=sys.stdout):
 
     print(f'Finding Duplicate Files in {directory}\n', file=output)
 
-    finder = FileFinder(directory)
+    finder = FileFinder(directory, pattern='pdf')
     files = finder.exec()
 
     unique_files, duplicate_files = filter_duplicate(files)

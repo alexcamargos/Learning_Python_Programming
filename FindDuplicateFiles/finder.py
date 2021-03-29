@@ -34,6 +34,13 @@ _BUFFER_SIZE = 1024 * 8
 
 
 def _signature(st):
+
+    """
+    st.st_mode - the file type
+    st.st_size - total size, in bytes
+    st.st_mtime - time of last modification
+    """
+
     return stat.S_IFMT(st.st_mode), st.st_size, st.st_mtime
 
 
@@ -42,7 +49,7 @@ class File:
         self.__path = path
         self.__file_hash = None
         self.__buffer_size = buffer_size
-        self.signature = _signature(self.path.stat())
+        self.__signature = _signature(self.path.stat())
 
         self.generate_file_hash()
 
@@ -68,6 +75,25 @@ class File:
     @hash.setter
     def hash(self, value):
         self.__file_hash = value
+
+    @property
+    def mode(self):
+        """The file type."""
+
+        return self.__signature[0]
+
+    @property
+    def size(self):
+        """Total size, in megabytes"""
+
+        return round((self.__signature[1] / 1e+6), 2)
+
+    @property
+    def mtime(self):
+        """The file type."""
+
+        return self.__signature[2]
+
 
     def generate_file_hash(self):
         """Generate a SHA-256 hash for each file."""
@@ -153,13 +179,13 @@ def main(output=sys.stdout):
 
     unique_files, duplicate_files = filter_duplicate(files)
 
-    print(f'Unique files in {directory}:', file=output)
+    print(f'Found {len(unique_files)} unique files in {directory}:', file=output)
     for unique_file in unique_files:
-        print(f'{unique_file.path}, HASH: {unique_file.hash}', file=output)
+        print(f'{unique_file.path}, SIZE: {unique_file.size} MB, HASH: {unique_file.hash}', file=output)
 
-    print(f'\n\nDuplicate files in {directory}:', file=output)
+    print(f'\n\nFound {len(duplicate_files)} duplicate files in {directory}:', file=output)
     for duplicate_file in duplicate_files:
-        print(f'{duplicate_file.path}, HASH: {duplicate_file.hash}', file=output)
+        print(f'{duplicate_file.path}, SIZE: {duplicate_file.size} MB, HASH: {duplicate_file.hash}', file=output)
 
 
 if __name__ == '__main__':

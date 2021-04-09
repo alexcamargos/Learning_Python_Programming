@@ -35,6 +35,7 @@ _hash_algorithm_map = {
 SUPPORTED_ALGORITHMS = set(_hash_algorithm_map.keys())
 
 FileHashResult = namedtuple('FileHashResult', ['file_name', 'hash'])
+VerifyHashResult = namedtuple('VerifyHashResult', ['file_name', 'hashes_match'])
 
 
 class FileHash:
@@ -90,11 +91,30 @@ class FileHash:
 
         return hash_files
 
+    def verify_checksum(self, checksum_file_name):
+        """Verifying the checksums of a file or set of files.
+
+        The checksum file is a text file where each line has the hash and filename in the following format:
+            ChecksumHash[SPACE][ASTERISK]FileName"""
+
+        hashes_match = []
+
+        with open(checksum_file_name, mode='r') as checksum_list:
+            for line in checksum_list:
+                expected_hash, file_name = line.strip().split(" ", 1)
+
+                if file_name.startswith('*'):
+                    file_name = file_name[1:]
+
+                actual_hash = self.generate_file_hash(file_name)
+                hashes_match.append(VerifyHashResult(file_name, expected_hash == actual_hash))
+
+        return hashes_match
+
 
 hash_file = FileHash()
 print('generate_file_hash()')
 print(hash_file.generate_file_hash(r'D:\_Teste_FileFinder\rufus-3.9p.exe'))
-
 
 path = Path(r'D:\_Teste_FileFinder')
 print('generate_directory_hash()')
@@ -105,3 +125,6 @@ files = [r'D:\_Teste_FileFinder\README.md', r'D:\_Teste_FileFinder\cpython.png']
 print('generate_files_hash()')
 for i in hash_file.generate_files_hash(files):
     print(i.file_name, i.hash)
+
+for x in hash_file.verify_checksum(r'D:\_Teste_FileFinder\sha512sum.txt'):
+    print(x.file_name, x.hashes_match)

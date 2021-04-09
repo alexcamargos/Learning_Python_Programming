@@ -16,9 +16,10 @@
 # --------------------------------------------------------------------------------------------------------------------
 
 """Python project to facilitate the generation of hash/checksum for files and directorys."""
-
 import hashlib
 from collections import namedtuple
+from pathlib import Path
+
 
 _hash_algorithm_map = {
     # 'adler32': zlib.adler32,
@@ -77,10 +78,30 @@ class FileHash:
 
         return [FileHashResult(fname, self.generate_file_hash(fname)) for fname in file_names]
 
+    def generate_directory_hash(self, directory_path, pattern=None):
+        """Generate the hash of files in a directory."""
+
+        if not pattern:
+            pattern = '*'
+
+        files_names = [file for file in directory_path.glob(pattern) if file.is_file()]
+
+        hash_files = self.generate_files_hash(files_names)
+
+        return hash_files
+
 
 hash_file = FileHash()
+print('generate_file_hash()')
 print(hash_file.generate_file_hash(r'D:\_Teste_FileFinder\rufus-3.9p.exe'))
 
+
+path = Path(r'D:\_Teste_FileFinder')
+print('generate_directory_hash()')
+for k in hash_file.generate_directory_hash(path):
+    print(k.file_name, k.hash)
+
 files = [r'D:\_Teste_FileFinder\README.md', r'D:\_Teste_FileFinder\cpython.png']
+print('generate_files_hash()')
 for i in hash_file.generate_files_hash(files):
     print(i.file_name, i.hash)

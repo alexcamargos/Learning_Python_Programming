@@ -1,5 +1,5 @@
-#  #!/usr/bin/env python
-#  encoding: utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 
 # --------------------------------------------------------------------------------------------------------------------
 #
@@ -16,12 +16,15 @@
 # --------------------------------------------------------------------------------------------------------------------
 
 """Python project to facilitate the generation of hash/checksum for files and directorys."""
+
+
 import hashlib
+
 from collections import namedtuple
 from pathlib import Path
 
 
-_hash_algorithm_map = {
+_HASH_ALGORITHM_MAP = {
     # 'adler32': zlib.adler32,
     # 'crc32': zlib.crc32,
     'md5': hashlib.md5,
@@ -32,39 +35,42 @@ _hash_algorithm_map = {
     'sha3_512': hashlib.sha3_512,
 }
 
-SUPPORTED_ALGORITHMS = set(_hash_algorithm_map.keys())
+_SUPPORTED_ALGORITHMS = set(_HASH_ALGORITHM_MAP.keys())
 
-FileHashResult = namedtuple('FileHashResult', ['file_name', 'hash'])
-VerifyHashResult = namedtuple('VerifyHashResult', ['file_name', 'hashes_match'])
+_FileHashResult = namedtuple('FileHashResult', ['file_name', 'hash'])
+_VerifyHashResult = namedtuple('VerifyHashResult', ['file_name', 'hashes_match'])
 
 
 class FileHash:
     """Wrapping the hashlib module to facilitate calculating file hashes."""
 
     def __init__(self, hash_algorithm='sha512', chunk_size=65536):
-        """"Initialize the class."""
+        """"Initialize the class.
 
-        if hash_algorithm not in SUPPORTED_ALGORITHMS:
+        chunk_size - Lets read stuff in 64 kb chunks."""
+
+        if hash_algorithm not in _SUPPORTED_ALGORITHMS:
             raise ValueError(f'Error, unsupported hash/checksum algorithm: {hash_algorithm}')
 
         # The hash algorithm to use.
-        self.hash_algorithm = hash_algorithm
+        self._hash_algorithm = hash_algorithm
 
         # The chunk size (in bytes) when reading files.
-        self.chunk_size = chunk_size
+        self._chunk_size = chunk_size
 
     def generate_file_hash(self, file_name):
         """Generate the hash of a file."""
 
-        file_hash = _hash_algorithm_map[self.hash_algorithm]()
+        # Automatically initializing the hash algorithm.
+        file_hash = _HASH_ALGORITHM_MAP[self._hash_algorithm]()
 
         try:
             with open(file_name, mode='rb', buffering=0) as fname:
-                file_block = fname.read(self.chunk_size)
+                fblock = fname.read(self._chunk_size)
 
-                while file_block:
-                    file_hash.update(file_block)
-                    file_block = fname.read(self.chunk_size)
+                while fblock:
+                    file_hash.update(fblock)
+                    fblock = fname.read(self._chunk_size)
 
         # System-related error, including I/O failures.
         except OSError as error:
@@ -77,7 +83,7 @@ class FileHash:
     def generate_files_hash(self, file_names):
         """Generate the hash of of multiple files."""
 
-        return [FileHashResult(fname, self.generate_file_hash(fname)) for fname in file_names]
+        return [_FileHashResult(fname, self.generate_file_hash(fname)) for fname in file_names]
 
     def generate_directory_hash(self, directory_path, pattern=None):
         """Generate the hash of files in a directory."""
@@ -95,36 +101,39 @@ class FileHash:
         """Verifying the checksums of a file or set of files.
 
         The checksum file is a text file where each line has the hash and filename in the following format:
-            ChecksumHash[SPACE][ASTERISK]FileName"""
+            ChecksumHash[SPACE][ASTERISK]FileName
+        """
 
         hashes_match = []
 
         with open(checksum_file_name, mode='r') as checksum_list:
-            for line in checksum_list:
-                expected_hash, file_name = line.strip().split(" ", 1)
+            for file_line in checksum_list:
+                expected_hash, file_name = file_line.strip().split(" ", 1)
 
                 if file_name.startswith('*'):
                     file_name = file_name[1:]
 
                 actual_hash = self.generate_file_hash(file_name)
-                hashes_match.append(VerifyHashResult(file_name, expected_hash == actual_hash))
+                hashes_match.append(_VerifyHashResult(file_name, expected_hash == actual_hash))
 
         return hashes_match
 
 
 hash_file = FileHash()
-print('generate_file_hash()')
-print(hash_file.generate_file_hash(r'D:\_Teste_FileFinder\rufus-3.9p.exe'))
+print(hash_file.generate_file_hash(r'D:\Videos\Filmes\The.Matrix.1999.2160p.UHD.BluRay.X265-IAMABLE\The.Matrix.1999.2160p.UHD.BluRay.X265-IAMABLE.mkv'))
 
-path = Path(r'D:\_Teste_FileFinder')
-print('generate_directory_hash()')
-for k in hash_file.generate_directory_hash(path):
-    print(k.file_name, k.hash)
-
-files = [r'D:\_Teste_FileFinder\README.md', r'D:\_Teste_FileFinder\cpython.png']
-print('generate_files_hash()')
-for i in hash_file.generate_files_hash(files):
-    print(i.file_name, i.hash)
-
-for x in hash_file.verify_checksum(r'D:\_Teste_FileFinder\sha512sum.txt'):
-    print(x.file_name, x.hashes_match)
+# print('generate_file_hash()')
+# print(hash_file.generate_file_hash(r'D:\_Teste_FileFinder\rufus-3.9p.exe'))
+#
+# path = Path(r'D:\_Teste_FileFinder')
+# print('generate_directory_hash()')
+# for k in hash_file.generate_directory_hash(path):
+#     print(k.file_name, k.hash)
+#
+# files = [r'D:\_Teste_FileFinder\README.md', r'D:\_Teste_FileFinder\cpython.png']
+# print('generate_files_hash()')
+# for i in hash_file.generate_files_hash(files):
+#     print(i.file_name, i.hash)
+#
+# for x in hash_file.verify_checksum(r'D:\_Teste_FileFinder\sha512sum.txt'):
+#     print(x.file_name, x.hashes_match)

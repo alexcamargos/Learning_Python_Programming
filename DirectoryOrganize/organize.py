@@ -18,10 +18,10 @@
 """Python project to facilitate organize of cluttered folder."""
 
 import os
-
 from fnmatch import filter
 from functools import partial
 from itertools import chain
+from shutil import move
 
 base_directory = r'D:\WORKSPACE\Python\LearningPython' \
                  r'Programming\DirectoryOrganize\tmp'
@@ -103,7 +103,7 @@ def make_directories_for_organize():
 
     print("Create the root directories if they don't exist...")
 
-    [os.mkdir(base_directory + '/' + directory) for directory in
+    [os.mkdir(base_directory + '\\' + directory) for directory in
      root_directories if not os.path.exists(base_directory + '/' + directory)]
 
 
@@ -124,13 +124,29 @@ def list_files_by_patterns(directory, patterns):
             yield os.path.join(root, fname)
 
 
+def move_files_to_directory(fnames, destination, verbose=False):
+    """Move the files to the corresponding directory."""
+
+    for fname in fnames:
+        if verbose:
+            file = fname.split('\\')[-1]
+            print(f"Moving {file} to {destination}.")
+
+        try:
+            move(fname, destination)
+        # TODO: Don't use bare 'except'
+        except:
+            return None
+
+
 if __name__ == "__main__":
     make_directories_for_organize()
 
-    # create a generator of all jpg files in the current dir.
-    print("Getting a list of all jpg files in the current dir...")
+    # Create a generator of all image files in the current dir.
+    print('Getting a list of all image files in the current directory...')
 
     image_files = list_files_by_patterns(base_directory, image_files_patterns)
 
-    for file in image_files:
-        print(file)
+    move_files_to_directory(image_files,
+                            base_directory + r'\Images',
+                            verbose=True)

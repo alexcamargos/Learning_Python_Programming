@@ -72,7 +72,8 @@ image_files_patterns = ['*.bpm',
                         '*.png',
                         '*.raw',
                         '*.tif',
-                        '*.tiff']
+                        '*.tiff',
+                        '*.webp']
 
 # Let's be absolutely sure we're getting everything that
 # looks like PDFs files.

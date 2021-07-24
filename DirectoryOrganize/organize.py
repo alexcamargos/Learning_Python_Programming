@@ -21,12 +21,11 @@ import os
 from fnmatch import filter
 from functools import partial
 from itertools import chain
-from shutil import move
+from shutil import move, Error
 
-# base_directory = r'D:\WORKSPACE\Python\LearningPython' \
-#                  r'Programming\DirectoryOrganize\tmp'
-
-base_directory = '.'
+# The absolute path of the working directory where
+# Python is currently running.
+base_directory = os.getcwd()
 
 # So for simplicity's sake, we will only the essential folders:
 root_directories = ['Audios',
@@ -38,18 +37,17 @@ root_directories = ['Audios',
                     'Scripts',
                     'Videos']
 
-# Let's be absolutely sure we're getting everything that
-# looks like audio files.
-audio_files_patterns = ['*.aac',
-                        '*.flac',
-                        '*.m4a',
-                        '*.mp3',
-                        '*.msv',
-                        '*.ogg',
-                        '*.wav',
-                        '*.wma']
-
 list_of_patterns = {
+    # Let's be absolutely sure we're getting everything that
+    # looks like audio files.
+    'audio_files': ['*.aac',
+                    '*.flac',
+                    '*.m4a',
+                    '*.mp3',
+                    '*.msv',
+                    '*.ogg',
+                    '*.wav',
+                    '*.wma'],
     # Let's be absolutely sure we're getting everything that
     # looks like compressed files.
     'compressed_files': ['*.7z',
@@ -102,51 +100,18 @@ list_of_patterns = {
                     '*.wmv']
 }
 
-compressed_files_patterns = ['*.7z',
-                             '*.dmg',
-                             '*.gz',
-                             '*.iso',
-                             '*.rar',
-                             '*.rz',
-                             '*.tar*',
-                             '*.zip']
-ebooks_file_patterns = ['*.azw*',
-                        '*.epub',
-                        '*.mobi']
-executable_files_patterns = ['*.exe']
-image_files_patterns = ['*.bpm',
-                        '*.eps',
-                        '*.gif',
-                        '*.jpeg',
-                        '*.jpg',
-                        '*.png',
-                        '*.raw',
-                        '*.tif',
-                        '*.tiff',
-                        '*.webp']
-pdf_file_patterns = ['*.pdf']
-scripts_file_patterns = ['*.bat',
-                         '*.py',
-                         '*.rb',
-                         '*.sh']
-video_files_patterns = ['*.avi',
-                        '*.mov',
-                        '*.mp2',
-                        '*.mp4',
-                        '*.mpeg',
-                        '*.mpg',
-                        '*.mpv',
-                        '*.webm',
-                        '*.wmv']
-
 
 def make_directories_for_organize():
     """Create the root directories if they don't exist."""
 
     print("Create the root directories if they don't exist...")
 
-    [os.mkdir(base_directory + '\\' + directory) for directory in
-     root_directories if not os.path.exists(base_directory + '/' + directory)]
+    try:
+        [os.mkdir(os.path.join(base_directory, directory)) for directory in
+         root_directories if
+         not os.path.exists(os.path.join(base_directory, directory))]
+    except ValueError:
+        raise ValueError('File directory may already exist.')
 
 
 def list_files_by_patterns(directory, patterns):
@@ -158,12 +123,14 @@ def list_files_by_patterns(directory, patterns):
     if not os.path.exists(root_directory):
         raise ValueError(f'Directory not found {directory}')
 
-    # List all files in the root_directory.
-    for root, dnames, fnames in os.walk(root_directory):
-        filter_partial = partial(filter, fnames)
+    # List all files in the directory.
+    with os.scandir(root_directory) as entry:
+        file_list = [fname.name for fname in entry if fname.is_file()]
+
+        filter_partial = partial(filter, file_list)
 
         for fname in chain(*map(filter_partial, patterns)):
-            yield os.path.join(root, fname)
+            yield os.path.join(base_directory, fname)
 
 
 def move_files_to_directory(fnames, destination, verbose=False):
@@ -176,29 +143,18 @@ def move_files_to_directory(fnames, destination, verbose=False):
 
         try:
             move(fname, destination)
-        # TODO: Don't use bare 'except'
-        except:
-            return None
+        except Error as error:
+            print(f'Failure moving file from {fname} to {destination}.')
+            print(error)
 
-
-# Parse command line arguments.
-if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser(description='Organize files.')
-
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='Verbose mode.')
 
 if __name__ == "__main__":
     make_directories_for_organize()
 
     # Create a generator of all image files in the current dir.
     print('Getting a list of all image files in the current directory...')
-
     image_files = list_files_by_patterns(base_directory,
                                          list_of_patterns['image_files'])
-
     move_files_to_directory(image_files,
-                            base_directory + r'\Images',
+                            os.path.join(base_directory, 'Images'),
                             verbose=True)

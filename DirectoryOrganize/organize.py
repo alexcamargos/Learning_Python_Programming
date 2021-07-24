@@ -23,8 +23,10 @@ from functools import partial
 from itertools import chain
 from shutil import move
 
-base_directory = r'D:\WORKSPACE\Python\LearningPython' \
-                 r'Programming\DirectoryOrganize\tmp'
+# base_directory = r'D:\WORKSPACE\Python\LearningPython' \
+#                  r'Programming\DirectoryOrganize\tmp'
+
+base_directory = '.'
 
 # So for simplicity's sake, we will only the essential folders:
 root_directories = ['Audios',
@@ -42,28 +44,76 @@ audio_files_patterns = ['*.aac',
                         '*.flac',
                         '*.m4a',
                         '*.mp3',
+                        '*.msv',
                         '*.ogg',
-                        '*.wav']
+                        '*.wav',
+                        '*.wma']
 
-# Let's be absolutely sure we're getting everything that
-# looks like compressed files.
+list_of_patterns = {
+    # Let's be absolutely sure we're getting everything that
+    # looks like compressed files.
+    'compressed_files': ['*.7z',
+                         '*.dmg',
+                         '*.gz',
+                         '*.iso',
+                         '*.rar',
+                         '*.rz',
+                         '*.tar*',
+                         '*.zip'],
+    # Let's be absolutely sure we're getting everything that
+    # looks like e-books files.
+    'ebooks_file': ['*.azw*',
+                    '*.epub',
+                    '*.mobi'],
+    # Let's be absolutely sure we're getting everything that
+    # looks like executable files.
+    'executable_files': ['*.exe'],
+    # Let's be absolutely sure we're getting everything that
+    # looks images files.
+    'image_files': ['*.bpm',
+                    '*.eps',
+                    '*.gif',
+                    '*.jpeg',
+                    '*.jpg',
+                    '*.png',
+                    '*.raw',
+                    '*.tif',
+                    '*.tiff',
+                    '*.webp'],
+    # Let's be absolutely sure we're getting everything that
+    # looks like PDFs files.
+    'pdf_file': ['*.pdf'],
+    # Let's be absolutely sure we're getting everything that
+    # looks like scripts files.
+    'scripts_file': ['*.bat',
+                     '*.py',
+                     '*.rb',
+                     '*.sh'],
+    # Let's be absolutely sure we're getting everything that
+    # looks like video files.
+    'video_files': ['*.avi',
+                    '*.mov',
+                    '*.mp2',
+                    '*.mp4',
+                    '*.mpeg',
+                    '*.mpg',
+                    '*.mpv',
+                    '*.webm',
+                    '*.wmv']
+}
+
 compressed_files_patterns = ['*.7z',
+                             '*.dmg',
+                             '*.gz',
+                             '*.iso',
                              '*.rar',
+                             '*.rz',
                              '*.tar*',
                              '*.zip']
-
-# Let's be absolutely sure we're getting everything that
-# looks like e-books files.
 ebooks_file_patterns = ['*.azw*',
                         '*.epub',
                         '*.mobi']
-
-# Let's be absolutely sure we're getting everything that
-# looks like executable files.
 executable_files_patterns = ['*.exe']
-
-# Let's be absolutely sure we're getting everything that
-# looks images files.
 image_files_patterns = ['*.bpm',
                         '*.eps',
                         '*.gif',
@@ -74,20 +124,11 @@ image_files_patterns = ['*.bpm',
                         '*.tif',
                         '*.tiff',
                         '*.webp']
-
-# Let's be absolutely sure we're getting everything that
-# looks like PDFs files.
 pdf_file_patterns = ['*.pdf']
-
-# Let's be absolutely sure we're getting everything that
-# looks like scripts files.
 scripts_file_patterns = ['*.bat',
                          '*.py',
                          '*.rb',
                          '*.sh']
-
-# Let's be absolutely sure we're getting everything that
-# looks like video files.
 video_files_patterns = ['*.avi',
                         '*.mov',
                         '*.mp2',
@@ -140,13 +181,23 @@ def move_files_to_directory(fnames, destination, verbose=False):
             return None
 
 
+# Parse command line arguments.
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Organize files.')
+
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Verbose mode.')
+
 if __name__ == "__main__":
     make_directories_for_organize()
 
     # Create a generator of all image files in the current dir.
     print('Getting a list of all image files in the current directory...')
 
-    image_files = list_files_by_patterns(base_directory, image_files_patterns)
+    image_files = list_files_by_patterns(base_directory,
+                                         list_of_patterns['image_files'])
 
     move_files_to_directory(image_files,
                             base_directory + r'\Images',

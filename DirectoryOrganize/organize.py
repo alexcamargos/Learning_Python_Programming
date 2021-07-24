@@ -148,13 +148,107 @@ def move_files_to_directory(fnames, destination, verbose=False):
             print(error)
 
 
-if __name__ == "__main__":
-    make_directories_for_organize()
+def audios_handling(verbose=True):
+    """Handling of all audios files."""
 
-    # Create a generator of all image files in the current dir.
-    print('Getting a list of all image files in the current directory...')
+    audios_files = list_files_by_patterns(base_directory,
+                                          list_of_patterns['audio_files'])
+
+    move_files_to_directory(audios_files,
+                            os.path.join(base_directory, 'Audios'),
+                            verbose)
+
+
+def compressed_handling(verbose=True):
+    """Handling of all compressed files."""
+
+    compressed_files = list_files_by_patterns(base_directory,
+                                              list_of_patterns[
+                                                  'compressed_files'])
+
+    move_files_to_directory(compressed_files,
+                            os.path.join(base_directory, 'Compressed'),
+                            verbose)
+
+
+def ebooks_handling(verbose=True):
+    """Handling of all ebooks files."""
+
+    ebooks_files = list_files_by_patterns(base_directory,
+                                          list_of_patterns[
+                                              'ebooks_file'])
+
+    move_files_to_directory(ebooks_files,
+                            os.path.join(base_directory, 'Ebooks'),
+                            verbose)
+
+
+def executable_handling(verbose=True):
+    """Handling of all executable files."""
+
+    executable_files = list_files_by_patterns(base_directory,
+                                              list_of_patterns[
+                                                  'executable_files'])
+
+    move_files_to_directory(executable_files,
+                            os.path.join(base_directory, 'Executable'),
+                            verbose)
+
+
+def images_handling(verbose=True):
+    """Handling of all images files."""
+
     image_files = list_files_by_patterns(base_directory,
                                          list_of_patterns['image_files'])
+
     move_files_to_directory(image_files,
                             os.path.join(base_directory, 'Images'),
-                            verbose=True)
+                            verbose)
+
+
+def pdfs_handling(verbose=True):
+    """Handling of all PDFs files."""
+
+    pdfs_files = list_files_by_patterns(base_directory,
+                                        list_of_patterns[
+                                            'pdf_file'])
+
+    move_files_to_directory(pdfs_files,
+                            os.path.join(base_directory, 'PDFs'),
+                            verbose)
+
+
+def scripts_handling(verbose=True):
+    """Handling of all scripts files."""
+
+    scripts_files = list_files_by_patterns(base_directory,
+                                           list_of_patterns[
+                                               'scripts_file'])
+
+    move_files_to_directory(scripts_files,
+                            os.path.join(base_directory, 'Scripts'),
+                            verbose)
+
+
+def videos_handling(verbose=True):
+    """Handling of all videos files."""
+
+    videos_files = list_files_by_patterns(base_directory,
+                                          list_of_patterns[
+                                              'video_files'])
+
+    move_files_to_directory(videos_files,
+                            os.path.join(base_directory, 'Videos'),
+                            verbose)
+
+
+if __name__ == "__main__":
+    make_directories_for_organize()
+    audios_handling()
+    compressed_handling()
+    ebooks_handling()
+    executable_handling()
+    images_handling()
+    pdfs_handling()
+    scripts_handling()
+    videos_handling()

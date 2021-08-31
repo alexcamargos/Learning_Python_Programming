@@ -23,12 +23,18 @@ rest_api = Api(flask_app)
 
 
 class HelloWord(Resource):
-    @staticmethod
-    def get():
+    def get(self):
+        return {'message': 'Hello World, a simples HTTP GET request method.'}
+
+    def post(self):
+        return {'message': 'Hello World, a simples HTTP POST request method.'}
+
+    def put(self):
+        return {'message': 'Hello World, a simples HTTP PUT request method.'}
+
+    def delete(self):
         return {
-            'mensagem':
-                'Hello World, a simple REST API with Python and Flask.'
-        }
+            'message': 'Hello World, a simples HTTP DELETE request method.'}
 
 
 rest_api.add_resource(HelloWord, '/helloword')

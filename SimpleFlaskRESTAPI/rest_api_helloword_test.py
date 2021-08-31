@@ -18,7 +18,9 @@ import requests
 
 BASE_URL = 'http://127.0.0.1:5000/'
 ENDPOINT = 'helloword'
+ENDPOINT2 = 'helloword2/'
 REQUEST_URL = BASE_URL + ENDPOINT
+REQUEST_URL2 = BASE_URL + ENDPOINT2
 
 with requests.get(REQUEST_URL) as response_get:
     print(response_get.json())
@@ -31,3 +33,8 @@ with requests.put(REQUEST_URL) as response_put:
 
 with requests.delete(REQUEST_URL) as response_delete:
     print(response_delete.json())
+
+with requests.get(
+        REQUEST_URL2 +
+        'Alex/A resposta é 42') as response:
+    print(response.json())

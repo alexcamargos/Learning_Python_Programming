@@ -37,7 +37,14 @@ class HelloWord(Resource):
             'message': 'Hello World, a simples HTTP DELETE request method.'}
 
 
+class HelloWord2(Resource):
+    def get(self, name, message):
+        return {'name': name, 'message': message}
+
+
 rest_api.add_resource(HelloWord, '/helloword')
+rest_api.add_resource(HelloWord2,
+                      '/helloword2/<string:name>/<string:message>')
 
 if __name__ == '__main__':
     flask_app.run(debug=True)

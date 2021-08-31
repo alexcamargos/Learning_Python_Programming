@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  ---------------------------------------------------------------------------
-#  Name: main.py
+#  Name: helloword_api.py
 #  Version: 0.0.1
 #  Summary: A simple REST API with Python and Flask
 #

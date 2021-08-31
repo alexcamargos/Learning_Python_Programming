@@ -2,7 +2,7 @@
 #  encoding: utf-8
 #
 #  ---------------------------------------------------------------------------
-#  Name: main.py
+#  Name: rest_api_helloword_test.py
 #  Version: 0.0.1
 #  Summary: Testing a simple REST API making with Flask.
 #

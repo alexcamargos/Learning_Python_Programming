@@ -141,3 +141,4 @@ cython_debug/
 /CLIPlannerAppUsingABC/reminders-venv/
 /CLIPlannerAppUsingABC/.report.json
 /DirectoryOrganize/tmp/
+.vs/
